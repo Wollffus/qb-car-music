@@ -5,6 +5,6 @@
 
 ### SETUP 
 - Add these 1 lines your to `Server.cfg`.
-- 
+- Download and Ensure xsound
 - Ensure qb-car-music
 - Done!
