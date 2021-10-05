@@ -1,47 +1,47 @@
 $('#shutdownbutton').click(function() {
-    $.post('https://car-radio/action', JSON.stringify({
+    $.post('https://qb-car-music/action', JSON.stringify({
         action: 'exit'
     }));
 })
 
 $('#volumedown').click(function() {
-    $.post('https://car-radio/action', JSON.stringify({
+    $.post('https://qb-car-music/action', JSON.stringify({
         action: 'volumedown'
     }));
 })
 
 $('#volumeup').click(function() {
-    $.post('https://car-radio/action', JSON.stringify({
+    $.post('https://qb-car-music/action', JSON.stringify({
         action: 'volumeup'
     }));
 })
 
 $('#play').click(function() {
-    $.post('https://car-radio/action', JSON.stringify({
+    $.post('https://qb-car-music/action', JSON.stringify({
         action: 'play'
     }));
 })
 
 $('#pause').click(function() {
-    $.post('https://car-radio/action', JSON.stringify({
+    $.post('https://qb-car-music/action', JSON.stringify({
         action: 'pause'
     }));
 })
 
 $('#loop').click(function() {
-    $.post('https://car-radio/action', JSON.stringify({
+    $.post('https://qb-car-music/action', JSON.stringify({
         action: 'loop'
     }));
 })
 
 $('#back').click(function() {
-    $.post('https://car-radio/action', JSON.stringify({
+    $.post('https://qb-car-music/action', JSON.stringify({
         action: 'back'
     }));
 })
 
 $('#forward').click(function() {
-    $.post('https://car-radio/action', JSON.stringify({
+    $.post('https://qb-car-music/action', JSON.stringify({
         action: 'forward'
     }));
 })
@@ -50,7 +50,7 @@ var vidname = "Name not Found";
 
 $('#inputok').click(function() {
     var url = document.getElementById('linkinput').value
-    $.post('https://car-radio/action', JSON.stringify({
+    $.post('https://qb-car-music/action', JSON.stringify({
         action: 'seturl',
         link: url,
     }));
@@ -189,7 +189,7 @@ $(document).ready(function(){
 	$('#main').hide();
 	document.onkeyup = function (data) {
 		if (data.which == 27) {
-			$.post('https://car-radio/action', JSON.stringify({
+			$.post('https://qb-car-music/action', JSON.stringify({
 				action: 'exit'
 			}));
 		}
