@@ -5,7 +5,7 @@
 
 ### Download Xsound - [Xsound](https://github.com/Xogy/xsound)
 
-### Note : Don't Change Resource Name (Should be - qb-car-music
+### Note : Don't Change Resource Name (Should be - qb-car-music)
 
 ### SETUP 
 - Add these 1 lines your to `Server.cfg` or `Resources.cfg`.
