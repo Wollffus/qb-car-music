@@ -2,20 +2,20 @@ QBCore = nil
 
 TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
 
-QBCore.Functions.TriggerCallback('MusicEverywhere:GetMusic', function(source,cb)
+QBCore.Functions.TriggerCallback('qb-car-music:GetMusic', function(source,cb)
     cb(Config.Zones)
 end)
 
 if Config.ItemInVehicle then
 	QBCore.Functions.CreateUseableItem(Config.ItemInVehicle, function(playerId)
-		TriggerClientEvent("MusicEverywhere:ShowNui",playerId)
+		TriggerClientEvent("qb-car-music:ShowNui",playerId)
 	end)
 end
 
 local xSound = exports.xsound
 
-RegisterNetEvent("MusicEverywhere:ChangeVolume")
-AddEventHandler("MusicEverywhere:ChangeVolume", function(vol, nome)
+RegisterNetEvent("qb-car-music:ChangeVolume")
+AddEventHandler("qb-car-music:ChangeVolume", function(vol, nome)
     local somafter = false
     local rangeafter = false
     for i = 1, #Config.Zones do
@@ -40,12 +40,12 @@ AddEventHandler("MusicEverywhere:ChangeVolume", function(vol, nome)
         end
     end
     if somafter and rangeafter then
-        TriggerClientEvent("MusicEverywhere:ChangeVolume",-1,somafter,rangeafter, nome)
+        TriggerClientEvent("qb-car-music:ChangeVolume",-1,somafter,rangeafter, nome)
     end
 end)
 
-RegisterNetEvent("MusicEverywhere:ChangeLoop")
-AddEventHandler("MusicEverywhere:ChangeLoop", function(nome,tip)
+RegisterNetEvent("qb-car-music:ChangeLoop")
+AddEventHandler("qb-car-music:ChangeLoop", function(nome,tip)
 	local loopstate
 	for i = 1, #Config.Zones do
 		local v = Config.Zones[i]
@@ -55,23 +55,23 @@ AddEventHandler("MusicEverywhere:ChangeLoop", function(nome,tip)
 		end
 	end
 	if loopstate ~= nil then
-		TriggerClientEvent("MusicEverywhere:ChangeLoop",-1,loopstate, nome)
+		TriggerClientEvent("qb-car-music:ChangeLoop",-1,loopstate, nome)
 	end
 end)
 
-RegisterNetEvent("MusicEverywhere:ChangeState")
-AddEventHandler("MusicEverywhere:ChangeState", function(type, nome)
+RegisterNetEvent("qb-car-music:ChangeState")
+AddEventHandler("qb-car-music:ChangeState", function(type, nome)
 	for i = 1, #Config.Zones do
 		local v = Config.Zones[i]
 		if nome == v.name then
 			v.isplaying = type
 		end
 	end
-	TriggerClientEvent("MusicEverywhere:ChangeState",-1,type, nome)
+	TriggerClientEvent("qb-car-music:ChangeState",-1,type, nome)
 end)
 
-RegisterNetEvent("MusicEverywhere:ChangePosition")
-AddEventHandler("MusicEverywhere:ChangePosition", function(quanti, nome)
+RegisterNetEvent("qb-car-music:ChangePosition")
+AddEventHandler("qb-car-music:ChangePosition", function(quanti, nome)
 	for i = 1, #Config.Zones do
 		local v = Config.Zones[i]
 		if nome == v.name then
@@ -81,11 +81,11 @@ AddEventHandler("MusicEverywhere:ChangePosition", function(quanti, nome)
 			end
 		end
 	end
-	TriggerClientEvent("MusicEverywhere:ChangePosition",-1,quanti, nome)
+	TriggerClientEvent("qb-car-music:ChangePosition",-1,quanti, nome)
 end)
 
-RegisterNetEvent("MusicEverywhere:ModifyURL")
-AddEventHandler("MusicEverywhere:ModifyURL", function(data)
+RegisterNetEvent("qb-car-music:ModifyURL")
+AddEventHandler("qb-car-music:ModifyURL", function(data)
 	local _data = data
 	local zena = false
 	for i = 1, #Config.Zones do
@@ -102,7 +102,7 @@ AddEventHandler("MusicEverywhere:ModifyURL", function(data)
 		end
 	end
 	if zena then
-		TriggerClientEvent("MusicEverywhere:ModifyURL",-1,zena)
+		TriggerClientEvent("qb-car-music:ModifyURL",-1,zena)
 	end
 end)
 
@@ -118,8 +118,8 @@ end
 
 SetTimeout(1000, countTime)
 
-RegisterNetEvent('MusicEverywhere:AddVehicle')
-AddEventHandler("MusicEverywhere:AddVehicle", function(vehdata)
+RegisterNetEvent('qb-car-music:AddVehicle')
+AddEventHandler("qb-car-music:AddVehicle", function(vehdata)
     local Data = {}
     Data.name = vehdata.plate
     Data.coords = vehdata.coords
@@ -131,10 +131,10 @@ AddEventHandler("MusicEverywhere:AddVehicle", function(vehdata)
     Data.deftime = 0
     Data.popo = vehdata.popo
     table.insert(Config.Zones, Data)
-    TriggerClientEvent('MusicEverywhere:AddVehicle', math.floor(-1), Config.Zones[#Config.Zones])
+    TriggerClientEvent('qb-car-music:AddVehicle', math.floor(-1), Config.Zones[#Config.Zones])
 end)
 
-RegisterNetEvent('MusicEverywhere:GetDate')
-AddEventHandler('MusicEverywhere:GetDate', function()
-    TriggerClientEvent('MusicEverywhere:SendData', math.floor(-1), Config.Zones)
+RegisterNetEvent('qb-car-music:GetDate')
+AddEventHandler('qb-car-music:GetDate', function()
+    TriggerClientEvent('qb-car-music:SendData', math.floor(-1), Config.Zones)
 end)

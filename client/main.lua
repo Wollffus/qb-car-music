@@ -19,7 +19,7 @@ Citizen.CreateThread(function()
        	Citizen.Wait(10)
     end
 	myjob = QBCore.Functions.GetPlayerData().job
-	TriggerServerEvent("MusicEverywhere:GetDate")
+	TriggerServerEvent("qb-car-music:GetDate")
 end)
 
 RegisterNetEvent('QBCore:Client:OnJobUpdate')  
@@ -40,7 +40,7 @@ RegisterNUICallback("action", function(data)
 	elseif data.action == "play" then
 		if xSound:soundExists(nameid) then
 			if xSound:isPaused(nameid) then
-				TriggerServerEvent("MusicEverywhere:ChangeState", true, nameid)
+				TriggerServerEvent("qb-car-music:ChangeState", true, nameid)
 				local esperar = 0
 				while nuiaberto do
 					Wait(1000)
@@ -62,7 +62,7 @@ RegisterNUICallback("action", function(data)
 	elseif data.action == "pause" then
 		if xSound:soundExists(nameid) then
 			if xSound:isPlaying(nameid) then
-				TriggerServerEvent("MusicEverywhere:ChangeState", false, nameid)
+				TriggerServerEvent("qb-car-music:ChangeState", false, nameid)
 			end
 		end
 	elseif data.action == "exit" then
@@ -74,7 +74,7 @@ RegisterNUICallback("action", function(data)
 	elseif data.action == "loop" then
 		if xSound:soundExists(nameid) then
 			datasoundinfo.loop = not xSound:isLooped(nameid)
-			TriggerServerEvent("MusicEverywhere:ChangeLoop",nameid,datasoundinfo.loop)
+			TriggerServerEvent("qb-car-music:ChangeLoop",nameid,datasoundinfo.loop)
 		else
 			datasoundinfo.loop = not datasoundinfo.loop
 		end
@@ -87,11 +87,11 @@ RegisterNUICallback("action", function(data)
 		end
 	elseif data.action == "forward" then
 		if xSound:soundExists(nameid) then
-			TriggerServerEvent("MusicEverywhere:ChangePosition", 10, nameid)
+			TriggerServerEvent("qb-car-music:ChangePosition", 10, nameid)
 		end
 	elseif data.action == "back" then
 		if xSound:soundExists(nameid) then
-			TriggerServerEvent("MusicEverywhere:ChangePosition", -10, nameid)
+			TriggerServerEvent("qb-car-music:ChangePosition", -10, nameid)
 		end
 	end
 end)
@@ -115,7 +115,7 @@ function ApplySound(quanti,plate)
             action = "changetextv",
             text = volume,
         })
-		TriggerServerEvent("MusicEverywhere:ChangeVolume", quanti, plate)
+		TriggerServerEvent("qb-car-music:ChangeVolume", quanti, plate)
 	end
 end
 
@@ -141,7 +141,7 @@ function SetUrl(url,nid)
 			if IsPedInAnyVehicle(PlayerPedId(), false) then
 				vehdata.popo = NetworkGetNetworkIdFromEntity(GetVehiclePedIsIn(PlayerPedId(),false))
 			end
-			TriggerServerEvent("MusicEverywhere:ModifyURL",vehdata)
+			TriggerServerEvent("qb-car-music:ModifyURL",vehdata)
 		else
 			if IsPedInAnyVehicle(PlayerPedId(), false) then
 				local veh = GetVehiclePedIsIn(PlayerPedId(),false)
@@ -154,7 +154,7 @@ function SetUrl(url,nid)
 				vehdata.popo = netid
 				vehdata.volume = datasoundinfo.volume
 				vehdata.loop = datasoundinfo.loop
-				TriggerServerEvent("MusicEverywhere:AddVehicle",vehdata)
+				TriggerServerEvent("qb-car-music:AddVehicle",vehdata)
 			end
 		end
 	else
@@ -199,8 +199,8 @@ if not Config.ItemInVehicle then
 end
 
 if Config.ItemInVehicle then
-	RegisterNetEvent("MusicEverywhere:ShowNui")
-	AddEventHandler("MusicEverywhere:ShowNui", function()
+	RegisterNetEvent("qb-car-music:ShowNui")
+	AddEventHandler("qb-car-music:ShowNui", function()
 		show()
 	end)
 end
@@ -291,8 +291,8 @@ end
 
 Zones = {}
 
-RegisterNetEvent("MusicEverywhere:AddVehicle")
-AddEventHandler("MusicEverywhere:AddVehicle", function(data)
+RegisterNetEvent("qb-car-music:AddVehicle")
+AddEventHandler("qb-car-music:AddVehicle", function(data)
 	table.insert(Zones, data)
 	local v = data
 	if xSound:soundExists(v.name) then
@@ -317,8 +317,8 @@ AddEventHandler("MusicEverywhere:AddVehicle", function(data)
 	StartMusicLoop(#Zones)
 end)
 
-RegisterNetEvent("MusicEverywhere:ModifyURL")
-AddEventHandler("MusicEverywhere:ModifyURL", function(data)
+RegisterNetEvent("qb-car-music:ModifyURL")
+AddEventHandler("qb-car-music:ModifyURL", function(data)
 	local v = data
 	local avancartodos = v.volume
 	if not Config.PlayToEveryone and v.popo then
@@ -403,8 +403,8 @@ AddEventHandler("MusicEverywhere:ModifyURL", function(data)
 	end
 end)
 
-RegisterNetEvent("MusicEverywhere:ChangeState")
-AddEventHandler("MusicEverywhere:ChangeState", function(tipo, nome)
+RegisterNetEvent("qb-car-music:ChangeState")
+AddEventHandler("qb-car-music:ChangeState", function(tipo, nome)
 	if tipo and xSound:soundExists(nome) then
 		xSound:Resume(nome)
 	elseif xSound:soundExists(nome) then
@@ -433,8 +433,8 @@ AddEventHandler("MusicEverywhere:ChangeState", function(tipo, nome)
 	end
 end)
 
-RegisterNetEvent("MusicEverywhere:ChangePosition")
-AddEventHandler("MusicEverywhere:ChangePosition", function(quanti, nome)
+RegisterNetEvent("qb-car-music:ChangePosition")
+AddEventHandler("qb-car-music:ChangePosition", function(quanti, nome)
 	local tempapply
 	for i = 1, #Zones do
 		local v = Zones[i]
@@ -451,8 +451,8 @@ AddEventHandler("MusicEverywhere:ChangePosition", function(quanti, nome)
 	end
 end)
 
-RegisterNetEvent("MusicEverywhere:ChangeLoop")
-AddEventHandler("MusicEverywhere:ChangeLoop", function(tipo, nome)
+RegisterNetEvent("qb-car-music:ChangeLoop")
+AddEventHandler("qb-car-music:ChangeLoop", function(tipo, nome)
 	if xSound:soundExists(nome) then
 		xSound:setSoundLoop(nome,tipo)
 	end
@@ -464,8 +464,8 @@ AddEventHandler("MusicEverywhere:ChangeLoop", function(tipo, nome)
 	end
 end)
 
-RegisterNetEvent("MusicEverywhere:ChangeVolume")
-AddEventHandler("MusicEverywhere:ChangeVolume", function(som, range, nome)
+RegisterNetEvent("qb-car-music:ChangeVolume")
+AddEventHandler("qb-car-music:ChangeVolume", function(som, range, nome)
 	local carroe
 	local crds
     for i = 1, #Zones do
@@ -497,8 +497,8 @@ end
 
 SetTimeout(2000, countTime)
 
-RegisterNetEvent("MusicEverywhere:SendData")
-AddEventHandler("MusicEverywhere:SendData", function(data)
+RegisterNetEvent("qb-car-music:SendData")
+AddEventHandler("qb-car-music:SendData", function(data)
     Zones = data
     for i = 1, #Zones do
 		local v = Zones[i]
