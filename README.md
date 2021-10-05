@@ -7,7 +7,7 @@
 
 ### SETUP 
 - Add these 1 lines your to `Server.cfg` or `Resources.cfg`.
-- Download xsound 
+- Download xsound - [Github](https://github.com/Xogy/xsound)
 - Ensure xsound
 - Ensure qb-car-music
 - Done!
