@@ -1,7 +1,7 @@
 # QBUS Car Music/Radio
 ### Previews : [Youtube](https://youtu.be/0efPWbqq8Go)
 
-### My Discord Server - [DISCORD](https://discord.io/AFLAFW)
+### My Discord Server - [DISCORD](https://discord.gg/jSDMuNjpuw)
 
 ### Download Xsound - [Xsound](https://github.com/Xogy/xsound)
 
